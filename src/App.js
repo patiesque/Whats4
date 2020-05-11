@@ -1,53 +1,56 @@
 import React from 'react';
 import styled from 'styled-components'
-import Formulario from './Components/index'
+import MessageForm from './Components/MessageForm/index'
+import Message from './Components/Message/index'
 
 const Main = styled.div`
+   max-width: 600px;
+  height: 100vh;
+  border: 1px solid black;
+  flex: 1;
   display: flex;
-  justify-content: center;
-`
-
-const Container = styled.div`
- width: 600px;
- height: 99.5vh;
- border: 1px solid black;
- display: flex;
- flex-direction: column;
- justify-content: flex-end;
+  flex-direction: column;
+  background-color: #e5ddd5;
 `
 
 const MensagemContainer = styled.div`
- display: flex;
- flex-direction: column;
- padding: 20px;
+ flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
 `
 
-class App extends React.Component{
-  constructor(){
-    super()
 
+
+class App extends React.Component {
+  constructor() {
+    super()
     this.state = {
-      mensagens:[]
+      messages: []
     }
   }
-adicionarMensagem = (texto) => {
-  this.setState({mensagens: [...this.state.mensagens, texto ]})
-}
 
-render(){
-return (
-  <Main>
-    <Container>
-      <MensagemContainer>
-        {
-         this.state.mensagens.map((texto) => <p>{texto.usuarioenviar}{': ' + texto.mensagemenviar}</p>)
-        }
-      </MensagemContainer>
-      <Formulario adicionarMensagem={this.adicionarMensagem}></Formulario>
-    </Container>
-  </Main>
-);
-}
+  addMessage = (message) => {
+    this.setState({ messages: [...this.state.messages, message] })
+  }
+
+  deleteMessage = (message) => {
+    this.setState({ messages: this.state.messages.filter(msg => msg !== message) })
+  }
+
+  render() {
+    return (
+      <Main>
+          <MensagemContainer>
+            {
+              this.state.messages.map((message, index) => <Message deleteMessage={this.deleteMessage} message={message} key={index}></Message>)
+            }
+          </MensagemContainer>
+          <MessageForm addMessage={this.addMessage}></MessageForm>
+      </Main>
+    );
+  }
 }
 
 export default App;
