@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 const MessageContainer = styled.div`
   display: flex;
-
   flex-direction: column;
   margin: 10px 0;
 `
@@ -12,13 +11,21 @@ const MessageBox = styled.div`
   max-width: 40%;
   height: 100%;
   padding: 10px 15px;
-  border-radius: 5px;
+  border-radius: ${props => {
+    if(props.position === 'right') {
+      return '5px 5px 0 5px;'
+
+    } else {
+      return '5px 5px 5px 0;' 
+    }
+  }};
   text-align: ${props => props.position};
   align-self: ${props => {
     if(props.position === 'right') {
-      return 'flex-end'
+      return 'flex-end;'
+
     } else {
-      return 'flex-start'
+      return 'flex-start;' 
     }
   }};
   display: flex;
@@ -51,7 +58,7 @@ class Message extends React.Component {
 
   render() {
     let position
-    let username
+    let username 
 
     if(this.props.message.user === 'eu') {
       position = 'right'

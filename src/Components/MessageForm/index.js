@@ -47,8 +47,6 @@ class MessageForm extends React.Component {
         })
     }
 
-
-
     onSendMessage = (event) => {
         event.preventDefault()
         const message = {
@@ -58,10 +56,8 @@ class MessageForm extends React.Component {
 
         this.props.addMessage(message)
 
-        this.setState({ textValue: '' })
+        this.setState({textValue: '' })
     }
-
-
 
 
     render() {
@@ -72,13 +68,15 @@ class MessageForm extends React.Component {
                     placeholder={'Usuário'}
                     name="userValue"
                     onChange={this.handleChange}
+                    value={this.state.userValue} 
                 />
                 <InputText
                     type="text"
                     placeholder={'Mensagem'}
                     name="textValue"
                     onChange={this.handleChange}
-                    value={this.state.messageValue} />
+                    value={this.state.textValue} 
+                    />
                 <SendButton>Enviar</SendButton>
             </FormContainer>
         )
